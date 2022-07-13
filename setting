@@ -1,0 +1,20 @@
+##### setting environment ##########
+####################################
+cd /scratch/user/xiliangdiao/
+ml intel/2020a
+ml Anaconda3/5.3.0
+source activate DIAO
+jupyter notebook --no-browser --port=8888
+#############################################
+####### remote linking #######################
+ssh -N -f -L localhost:8369:localhost:8888 xiliangdiao@grace3.hprc.tamu.edu
+
+##############################################
+######## run.csh #############################
+for file in B.E.13.B1850C5.ne120_t12.sehires38.003.sunway_02.pop.h.03??-??.nc
+do
+#  ncks -v SSH -d nlat,0,600 -d nlon,0,3599 "$file" "${file/nc/SSH.nc}"
+   ncks -v SALT -d z_t,0,1 -d nlat,0,1000 -d nlon,0,3599 "$file" "${file/nc/SSS.nc}"
+done
+###############################################
+
